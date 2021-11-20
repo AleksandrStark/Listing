@@ -3,13 +3,17 @@ import Item from './Item';
 
 export default function Listing({items}) {
     const elems = JSON.parse(JSON.stringify(items));
+    const obj = {'USD': '$', 
+    'EUR': '€',
+    'GBP': 'GBP'
+    }
     items.forEach((el, i) => {
         if (el.title) {
            (el.title.length > 50) && (elems[i].title = `${el.title.substr(0, 49)}...`)        
         } 
         if (el.price) {
-            el.currency_code === "USD" ? elems[i].price = `$${el.price}`
-            : elems[i].currency_code === "EUR" ? elems[i].price = `€${el.price}`
+            obj[el.currency_code] === 'USD' ? elems[i].price = `$${el.price}`
+            : elems[i].currency_code === 'EUR' ? elems[i].price = `€${el.price}`
             : elems[i].price = `GBP ${el.price}`;   
         } 
         if (el.quantity) {
